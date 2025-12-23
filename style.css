@@ -1,0 +1,155 @@
+* {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: rgb(20, 20, 20);
+    min-height: 100vh; 
+}
+
+/* --- Navigation --- */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 80px;
+    padding: 0 40px;    
+    background-color: black;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar-links {
+    display: flex;
+    gap: 20px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    height: 100%;   
+}
+
+.navbar-links a {
+    text-decoration: none;
+    color: white;
+    font-size: 18px; 
+    font-weight: bold;
+    display: block;
+}
+
+.navbar-links li {
+    position: relative;
+    height: 100%;        
+    display: flex;       
+    align-items: center; 
+    padding: 0 10px;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.navbar-links li::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 40%; 
+    background: linear-gradient(to top, rgba(0, 123, 255, 1) 0%, transparent 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: -1;
+}
+
+.navbar-links li:hover::after {
+    opacity: 1;
+}
+
+#logo {
+    font-size: 32px;
+    font-weight: bold;
+    text-decoration: none;
+    background: linear-gradient(135deg, rgb(0, 123, 255), rgb(61, 61, 255));
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+/* --- Grid Layout --- */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: 220px; 
+    gap: 30px;
+    padding: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* --- Card Styles --- */
+.card {
+    background-color: rgb(46, 46, 46);
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 2px 8px rgba(117, 117, 117, 0.5);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    transition: transform 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card.hero {
+    grid-column: span 2;
+    grid-row: span 2;
+}
+
+.card.hero h3 {
+    font-size: 2.5rem;
+    margin-top: 0;
+}
+
+.card h3 {
+    margin-top: 0;
+    color: #ffffff;
+}
+
+.card p {
+    color: #ffffff;
+    line-height: 1.5;
+}
+
+.btn-primary {
+    display: block; 
+    text-align: center; /* Centers the text inside the button */
+    text-decoration: none; /* Removes the underline */
+    background-color: #2563EB;
+    color: white;
+    border: none;
+    padding: 15px;
+    width: 100%;
+    font-weight: bold;
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: auto; 
+    transition: background-color 0.2s;
+}
+
+.btn-primary:hover {
+    background-color: #1d4ed8;
+}
+
+footer{
+    color: #555;
+    background-color: black;
+    text-align: center;
+    padding: 20px;
+    margin-top: 50px;
+}
+
