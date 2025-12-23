@@ -1,0 +1,1 @@
+A project homework made for Web Programming I course. No Backend, just pure frontend.

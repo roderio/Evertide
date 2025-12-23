@@ -6,8 +6,13 @@
 body {
     margin: 0;
     padding: 0;
-    background-color: rgb(20, 20, 20);
-    min-height: 100vh; 
+    background-image: url(assets/4k-black-oled-wallpapers.jpg);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column; 
 }
 
 /* --- Navigation --- */
@@ -86,6 +91,7 @@ body {
     padding: 40px;
     max-width: 1200px;
     margin: 0 auto;
+    flex: 1;
 }
 
 /* --- Card Styles --- */
@@ -126,8 +132,8 @@ body {
 
 .btn-primary {
     display: block; 
-    text-align: center; /* Centers the text inside the button */
-    text-decoration: none; /* Removes the underline */
+    text-align: center;
+    text-decoration: none;
     background-color: #2563EB;
     color: white;
     border: none;
@@ -150,6 +156,6 @@ footer{
     background-color: black;
     text-align: center;
     padding: 20px;
-    margin-top: 50px;
+    margin-bottom: auto;
 }
 
