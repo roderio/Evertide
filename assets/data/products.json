@@ -1,0 +1,82 @@
+[
+  {
+    "id": 1,
+    "title": "NVIDIA GeForce RTX 4090",
+    "price": 1599.99,
+    "description": "The ultimate GeForce GPU. It brings an enormous leap in performance, efficiency, and AI-powered graphics.",
+    "category": "gpu",
+    "image": "../assets/images/gpu.png"
+  },
+  {
+    "id": 2,
+    "title": "AMD Ryzen 9 7950X",
+    "price": 699.00,
+    "description": "16-core, 32-thread desktop processor. The best for creators and gamers.",
+    "category": "cpu",
+    "image": "../assets/images/cpu.png"
+  },
+  {
+    "id": 3,
+    "title": "Intel Core i9-13900K",
+    "price": 589.99,
+    "description": "24 cores (8 P-cores + 16 E-cores) and up to 5.8 GHz. Unlocked.",
+    "category": "cpu",
+    "image": "../assets/images/cpu.png"
+  },
+  {
+    "id": 4,
+    "title": "ASUS ROG Strix GeForce RTX 4080",
+    "price": 1199.99,
+    "description": "Next-gen performance and cooling. Powered by NVIDIA DLSS 3.",
+    "category": "gpu",
+    "image": "../assets/images/gpu.png"
+  },
+  {
+    "id": 5,
+    "title": "Corsair Vengeance DDR5 32GB",
+    "price": 129.99,
+    "description": "DDR5 5600MHz C36 Desktop Memory - Black.",
+    "category": "ram",
+    "image": "../assets/images/ram.png"
+  },
+  {
+    "id": 6,
+    "title": "Samsung 990 PRO 2TB SSD",
+    "price": 179.99,
+    "description": "PCIe 4.0 NVMe SSD. Blazing fast speeds for gaming and video editing.",
+    "category": "storage",
+    "image": "../assets/images/storage.png"
+  },
+  {
+    "id": 7,
+    "title": "MSI MPG Z790 Edge WiFi",
+    "price": 369.99,
+    "description": "LGA 1700, DDR5, PCIe 5.0, Wi-Fi 6E ATX Motherboard.",
+    "category": "motherboard",
+    "image": "../assets/images/motherboard.png"
+  },
+  {
+    "id": 8,
+    "title": "Lian Li O11 Dynamic EVO",
+    "price": 169.99,
+    "description": "Mid-tower chassis with dual chamber design and tempered glass.",
+    "category": "case",
+    "image": "../assets/images/case.png"
+  },
+  {
+    "id": 9,
+    "title": "Corsair RM1000x Shift",
+    "price": 209.99,
+    "description": "1000W 80+ Gold Fully Modular ATX Power Supply.",
+    "category": "power-supply",
+    "image": "../assets/images/psu.png"
+  },
+  {
+    "id": 10,
+    "title": "NZXT Kraken Elite 360",
+    "price": 279.99,
+    "description": "360mm AIO Liquid Cooler with LCD Display.",
+    "category": "cooling",
+    "image": "../assets/images/cooling.png"
+  }
+]

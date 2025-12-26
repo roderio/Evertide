@@ -4,11 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Evertide | Shopping Cart</title>
     <link rel="stylesheet" href="../style.css">
 </head>
 
 <body>
+
     <header class="navbar">
         <a id="logo" href="../index.html">Evertide</a>
 
@@ -26,6 +27,23 @@
             <a href="register.html" class="signup-btn">Sign Up</a>
         </div>
     </header>
+
+    <div class="cart-container">
+        <h2>Your Shopping Cart</h2>
+        <div id="cart-items" class="cart-items-list">
+            <!-- Items will be injected here -->
+        </div>
+        <div class="cart-summary">
+            <h3>Total: $<span id="cart-total-amount">0.00</span></h3>
+            <button class="btn-primary" onclick="alert('Checkout functionality coming soon!')">Checkout</button>
+        </div>
+    </div>
+
+    <footer>
+        &copy; Evertide All rights reserved. Created by Mahmood Dler Bahjat.
+    </footer>
+
+    <script src="../assets/js/cart.js"></script>
     <script src="../assets/js/transition.js"></script>
 </body>
 

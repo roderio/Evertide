@@ -7,23 +7,59 @@
     <title>Document</title>
     <link rel="stylesheet" href="../style.css">
     <script>
+        let allProducts = [];
+
         function fetchProducts() {
-            fetch('https://fakestoreapi.com/products').then(res => res.json()).then(products => {
-                const tableBody = document.getElementById('product-table-body');
-                products.forEach(product => {
-                    const row = document.createElement('tr');
-                    if(product.category == "electronics"){
-                        row.innerHTML = `
-                            <td style="text-transform: capitalize;">${product.category}</td>
-                            <td>FakeStoreAPI</td>
-                            <td>${product.title}</td>
-                            <td>$${product.price}</td>
-                        `;
-                    }
-                    tableBody.appendChild(row);
-                });
-            }).catch(error => console.error('Error fetching data:', error));
+            fetch('../assets/data/products.json')
+                .then(res => res.json())
+                .then(products => {
+                    allProducts = products;
+                    renderProducts(allProducts);
+                })
+                .catch(error => console.error('Error fetching data:', error));
         }
+
+        function renderProducts(products) {
+            const container = document.getElementById('product-container');
+            container.innerHTML = '';
+
+            products.forEach(product => {
+                const card = document.createElement('div');
+                card.className = 'card product-card';
+
+                const safeTitle = product.title.replace(/'/g, "\\'");
+                const productData = JSON.stringify({
+                    id: product.id,
+                    title: safeTitle,
+                    price: product.price,
+                    image: product.image
+                }).replace(/"/g, "&quot;");
+
+                card.innerHTML = `
+                    <img src="${product.image}" alt="${product.title}" class="product-image">
+                    <div class="card-content">
+                        <h3>${product.title}</h3>
+                        <p class="price">$${product.price}</p>
+                    </div>
+                    <button class="btn-primary" onclick="addToCart(${productData})">Add to Cart</button>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function filterProducts(category) {
+            // Update active button state
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            if (category === 'all') {
+                renderProducts(allProducts);
+            } else {
+                const filtered = allProducts.filter(p => p.category === category);
+                renderProducts(filtered);
+            }
+        }
+
         window.onload = fetchProducts;
     </script>
 </head>
@@ -38,6 +74,7 @@
             <li><a href="builder.html">PC Builder</a></li>
             <li><a href="about.html">About</a></li>
             <li><a href="contact.html">Contact</a></li>
+            <li><a href="cart.html">Cart</a></li>
         </ul>
 
         <div class="auth-links">
@@ -46,157 +83,26 @@
         </div>
     </header>
 
-    <div class="grid-container">
+    <div class="filter-bar">
+        <button class="filter-btn active" onclick="filterProducts('all')">All</button>
+        <button class="filter-btn" onclick="filterProducts('gpu')">GPUs</button>
+        <button class="filter-btn" onclick="filterProducts('cpu')">CPUs</button>
+        <button class="filter-btn" onclick="filterProducts('motherboard')">Motherboards</button>
+        <button class="filter-btn" onclick="filterProducts('ram')">RAM</button>
+        <button class="filter-btn" onclick="filterProducts('storage')">Storage</button>
+        <button class="filter-btn" onclick="filterProducts('case')">Cases</button>
+    </div>
 
-        <div class="card">
-            <div class="card-content">
-                <h3>Store</h3>
-                <p>Browse our wide selection of GPUs, CPUs, and peripherals.</p>
-            </div>
-            <a href="pages/store.html" class="btn-primary">Shop</a>
-        </div>
-
-        <div class="card">
-            <div class="card-content">
-                <h3>Store</h3>
-                <p>Browse our wide selection of GPUs, CPUs, and peripherals.</p>
-            </div>
-            <a href="pages/store.html" class="btn-primary">Shop</a>
-        </div>
-
-        <div class="card">
-            <div class="card-content">
-                <h3>Store</h3>
-                <p>Browse our wide selection of GPUs, CPUs, and peripherals.</p>
-            </div>
-            <a href="pages/store.html" class="btn-primary">Shop</a>
-        </div>
-
-        <div class="card">
-            <div class="card-content">
-                <h3>Store</h3>
-                <p>Browse our wide selection of GPUs, CPUs, and peripherals.</p>
-            </div>
-            <a href="pages/store.html" class="btn-primary">Shop</a>
-        </div>
-        
-        <div class="card">
-            <div class="card-content">
-                <h3>Store</h3>
-                <p>Browse our wide selection of GPUs, CPUs, and peripherals.</p>
-            </div>
-            <a href="pages/store.html" class="btn-primary">Shop</a>
-        </div>
-
-        <div class="card">
-            <div class="card-content">
-                <h3>Store</h3>
-                <p>Browse our wide selection of GPUs, CPUs, and peripherals.</p>
-            </div>
-            <a href="pages/store.html" class="btn-primary">Shop</a>
-        </div>
-
-        <div class="card">
-            <div class="card-content">
-                <h3>Store</h3>
-                <p>Browse our wide selection of GPUs, CPUs, and peripherals.</p>
-            </div>
-            <a href="pages/store.html" class="btn-primary">Shop</a>
-        </div>
-
-        <div class="card">
-            <div class="card-content">
-                <h3>Store</h3>
-                <p>Browse our wide selection of GPUs, CPUs, and peripherals.</p>
-            </div>
-            <a href="pages/store.html" class="btn-primary">Shop</a>
-        </div>
-
-        <div class="card">
-            <div class="card-content">
-                <h3>Store</h3>
-                <p>Browse our wide selection of GPUs, CPUs, and peripherals.</p>
-            </div>
-            <a href="pages/store.html" class="btn-primary">Shop</a>
-        </div>
-        
-        <div class="card">
-            <div class="card-content">
-                <h3>Store</h3>
-                <p>Browse our wide selection of GPUs, CPUs, and peripherals.</p>
-            </div>
-            <a href="pages/store.html" class="btn-primary">Shop</a>
-        </div>
-
-        <div class="card">
-            <div class="card-content">
-                <h3>Store</h3>
-                <p>Browse our wide selection of GPUs, CPUs, and peripherals.</p>
-            </div>
-            <a href="pages/store.html" class="btn-primary">Shop</a>
-        </div>
-
-        <div class="card">
-            <div class="card-content">
-                <h3>Store</h3>
-                <p>Browse our wide selection of GPUs, CPUs, and peripherals.</p>
-            </div>
-            <a href="pages/store.html" class="btn-primary">Shop</a>
-        </div>
-
-        <div class="card">
-            <div class="card-content">
-                <h3>Store</h3>
-                <p>Browse our wide selection of GPUs, CPUs, and peripherals.</p>
-            </div>
-            <a href="pages/store.html" class="btn-primary">Shop</a>
-        </div>
-
-        <div class="card">
-            <div class="card-content">
-                <h3>Store</h3>
-                <p>Browse our wide selection of GPUs, CPUs, and peripherals.</p>
-            </div>
-            <a href="pages/store.html" class="btn-primary">Shop</a>
-        </div>
-        
-        <div class="card">
-            <div class="card-content">
-                <h3>Store</h3>
-                <p>Browse our wide selection of GPUs, CPUs, and peripherals.</p>
-            </div>
-            <a href="pages/store.html" class="btn-primary">Shop</a>
-        </div>
-
-        <div class="card">
-            <div class="card-content">
-                <h3>Frequently-Asked Questions</h3>
-                <p>Take a quick peek of our answers to FAQs.</p>
-            </div>
-            <a href="pages/faq.html" class="btn-primary">Build</a>
-        </div>
-
-        <div class="card">
-            <div class="card-content">
-                <h3>Contact</h3>
-                <p>Need help? Our support team is ready to assist you 24/7.</p>
-            </div>
-            <a href="pages/contact.html" class="btn-primary">Email</a>
-        </div>
-
-        <div class="card">
-            <div class="card-content">
-                <h3>About</h3>
-                <p>Learn about our story and our mission to power Iraq.</p>
-            </div>
-            <a href="pages/about.html" class="btn-primary">Read</a>
-        </div>
+    <div id="product-container" class="grid-container">
+        <!-- Products will be loaded here -->
     </div>
 
 
     <footer>
         &copy; Evertide All rights reserved. Created by Mahmood Dler Bahjat.
     </footer>
+    <script src="../assets/js/cart.js"></script>
+    <script src="../assets/js/transition.js"></script>
 </body>
 
 </html>
