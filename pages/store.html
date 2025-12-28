@@ -6,26 +6,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="../style.css">
+
     <script>
         let allProducts = [];
+        let currentCategory = 'all';
+        let maxProductPrice = 3000;
 
         function fetchProducts() {
             fetch('../assets/data/products.json')
                 .then(res => res.json())
                 .then(products => {
                     allProducts = products;
-                    renderProducts(allProducts);
+                    // Find max price for slider
+                    maxProductPrice = Math.max(...products.map(p => p.price));
+                    setupPriceInputs(maxProductPrice);
+                    applyFilters();
                 })
                 .catch(error => console.error('Error fetching data:', error));
+        }
+
+        function setupPriceInputs(max) {
+            const slider = document.getElementById('price-range');
+            const maxInput = document.getElementById('max-price');
+
+            slider.max = Math.ceil(max);
+            slider.value = Math.ceil(max);
+            maxInput.value = Math.ceil(max);
         }
 
         function renderProducts(products) {
             const container = document.getElementById('product-container');
             container.innerHTML = '';
 
+            if (products.length === 0) {
+                container.innerHTML = '<p style="color: white; text-align: center; grid-column: 1/-1;">No products found.</p>';
+                return;
+            }
+
             products.forEach(product => {
                 const card = document.createElement('div');
                 card.className = 'card product-card';
+                // Inline animation delay for staggered appearance
+                card.style.animation = 'fadeIn 0.5s ease forwards';
 
                 const safeTitle = product.title.replace(/'/g, "\\'");
                 const productData = JSON.stringify({
@@ -39,7 +61,7 @@
                     <img src="${product.image}" alt="${product.title}" class="product-image">
                     <div class="card-content">
                         <h3>${product.title}</h3>
-                        <p class="price">$${product.price}</p>
+                        <p class="price">$${product.price.toLocaleString()}</p>
                     </div>
                     <button class="btn-primary" onclick="addToCart(${productData})">Add to Cart</button>
                 `;
@@ -47,17 +69,43 @@
             });
         }
 
-        function filterProducts(category) {
-            // Update active button state
-            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
+        function setCategory(category) {
+            currentCategory = category;
 
-            if (category === 'all') {
-                renderProducts(allProducts);
-            } else {
-                const filtered = allProducts.filter(p => p.category === category);
-                renderProducts(filtered);
-            }
+            // Update UI
+            document.querySelectorAll('.category-item').forEach(item => {
+                item.classList.remove('active');
+                if (item.dataset.category === category) item.classList.add('active');
+            });
+
+            applyFilters();
+        }
+
+        function updatePriceFromSlider() {
+            const sliderVal = document.getElementById('price-range').value;
+            document.getElementById('max-price').value = sliderVal;
+            applyFilters();
+        }
+
+        function updatePriceFromInput() {
+            const maxVal = document.getElementById('max-price').value;
+            document.getElementById('price-range').value = maxVal;
+            applyFilters();
+        }
+
+        function applyFilters() {
+            const searchTerm = document.getElementById('search-input').value.toLowerCase();
+            const minPrice = parseFloat(document.getElementById('min-price').value) || 0;
+            const maxPrice = parseFloat(document.getElementById('max-price').value) || Infinity;
+
+            const filtered = allProducts.filter(p => {
+                const matchesCategory = currentCategory === 'all' || p.category === currentCategory;
+                const matchesSearch = p.title.toLowerCase().includes(searchTerm);
+                const matchesPrice = p.price >= minPrice && p.price <= maxPrice;
+                return matchesCategory && matchesSearch && matchesPrice;
+            });
+
+            renderProducts(filtered);
         }
 
         window.onload = fetchProducts;
@@ -71,7 +119,6 @@
         <ul class="navbar-links">
             <li><a href="../index.html">Home</a></li>
             <li><a href="store.html">Store</a></li>
-            <li><a href="builder.html">PC Builder</a></li>
             <li><a href="about.html">About</a></li>
             <li><a href="contact.html">Contact</a></li>
             <li><a href="cart.html">Cart</a></li>
@@ -83,18 +130,46 @@
         </div>
     </header>
 
-    <div class="filter-bar">
-        <button class="filter-btn active" onclick="filterProducts('all')">All</button>
-        <button class="filter-btn" onclick="filterProducts('gpu')">GPUs</button>
-        <button class="filter-btn" onclick="filterProducts('cpu')">CPUs</button>
-        <button class="filter-btn" onclick="filterProducts('motherboard')">Motherboards</button>
-        <button class="filter-btn" onclick="filterProducts('ram')">RAM</button>
-        <button class="filter-btn" onclick="filterProducts('storage')">Storage</button>
-        <button class="filter-btn" onclick="filterProducts('case')">Cases</button>
-    </div>
+    <div class="store-container">
+        <!-- Sidebar -->
+        <aside class="sidebar card">
+            <h3>Search</h3>
+            <input type="text" id="search-input" class="search-box" placeholder="Search products..."
+                oninput="applyFilters()">
 
-    <div id="product-container" class="grid-container">
-        <!-- Products will be loaded here -->
+            <h3>Categories</h3>
+            <ul class="category-list">
+                <li class="category-item active" data-category="all" onclick="setCategory('all')">All Products</li>
+                <li class="category-item" data-category="gpu" onclick="setCategory('gpu')">GPUs</li>
+                <li class="category-item" data-category="cpu" onclick="setCategory('cpu')">CPUs</li>
+                <li class="category-item" data-category="motherboard" onclick="setCategory('motherboard')">Motherboards
+                </li>
+                <li class="category-item" data-category="ram" onclick="setCategory('ram')">RAM</li>
+                <li class="category-item" data-category="storage" onclick="setCategory('storage')">Storage</li>
+                <li class="category-item" data-category="case" onclick="setCategory('case')">Cases</li>
+                <li class="category-item" data-category="power-supply" onclick="setCategory('power-supply')">Power
+                    Supplies</li>
+                <li class="category-item" data-category="cooling" onclick="setCategory('cooling')">Cooling</li>
+            </ul>
+
+            <h3>Price Limit</h3>
+            <input type="range" id="price-range" class="price-slider" min="0" max="3000" step="10"
+                oninput="updatePriceFromSlider()">
+            <div class="price-inputs">
+                <input type="number" id="min-price" class="price-input" value="0" min="0" placeholder="Min"
+                    oninput="applyFilters()">
+                <span>-</span>
+                <input type="number" id="max-price" class="price-input" value="3000" min="0" placeholder="Max"
+                    oninput="updatePriceFromInput()">
+            </div>
+        </aside>
+
+        <!-- Product Grid -->
+        <div class="store-content">
+            <div id="product-container" class="store-grid">
+                <!-- Products will be loaded here -->
+            </div>
+        </div>
     </div>
 
 
