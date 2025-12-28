@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
             btn.href = 'pages/cart.html';
         }
 
-        // Tailwind Floating Button
+
         btn.className = 'floating-cart-btn fixed bottom-8 right-8 bg-black/60 backdrop-blur-md border-2 border-blue-600 text-blue-500 px-6 py-3 rounded-full font-bold text-base z-50 flex items-center gap-3 shadow-lg hover:bg-blue-600/10 hover:-translate-y-1 transition-all duration-300';
         btn.innerHTML = `<span class="btn-text">Go to Cart</span> <span class="cart-counter bg-blue-600 text-white rounded-full px-2 py-0.5 text-sm min-w-[24px] text-center">${getCartCount()}</span>`;
         document.body.appendChild(btn);
@@ -66,11 +66,11 @@ function triggerCartAnimation() {
 
     if (btn && btnText) {
         btnText.innerHTML = '&#10003; Item Added!';
-        // Tailwind expansion classes
+
         btn.classList.add('px-8', 'scale-105', 'bg-blue-600', 'text-white', 'border-transparent');
         btn.classList.remove('text-blue-500', 'bg-black/60');
 
-        // Counter style change
+
         const counter = btn.querySelector('.cart-counter');
         if (counter) {
             counter.classList.remove('bg-blue-600', 'text-white');
@@ -81,7 +81,7 @@ function triggerCartAnimation() {
             btn.classList.remove('px-8', 'scale-105', 'bg-blue-600', 'text-white', 'border-transparent');
             btn.classList.add('text-blue-500', 'bg-black/60');
 
-            // Revert count style
+
             if (counter) {
                 counter.classList.add('bg-blue-600', 'text-white');
                 counter.classList.remove('bg-white', 'text-blue-600');
@@ -121,7 +121,7 @@ function calculateTotal() {
 
 function renderCart() {
     const cartContainer = document.getElementById('cart-items');
-    // Note: ID changed in HTML refactor to match convention, ensure HTML has id="cart-total"
+
     const cartTotalElement = document.getElementById('cart-total');
 
     if (!cartContainer || !cartTotalElement) return;
@@ -137,10 +137,10 @@ function renderCart() {
 
     cart.forEach(item => {
         const itemElement = document.createElement('div');
-        // Tailwind Cart Item
+
         itemElement.className = 'flex items-center gap-4 p-4 border-b border-white/10 last:border-0 bg-white/5 rounded-lg';
 
-        // Flex container for mobile responsiveness could be added here
+
         itemElement.innerHTML = `
             <div class="h-16 w-16 bg-white rounded p-1 flex-shrink-0">
                 <img src="${item.image}" alt="${item.title}" class="h-full w-full object-contain">
@@ -172,7 +172,7 @@ function renderCart() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Check if we are on the cart page
+
     if (document.getElementById('cart-items')) {
         renderCart();
     }
