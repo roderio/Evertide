@@ -4,28 +4,186 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="../style.css">
+    <title>Evertide | Contact</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            blue: '#2563EB',
+                            dark: '#000000',
+                        }
+                    },
+                    backdropBlur: {
+                        xs: '2px',
+                    },
+                    animation: {
+                        fadeIn: 'fadeIn 0.5s ease-out forwards',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0', transform: 'translateY(10px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-image: url('../assets/black-back.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+    </style>
 </head>
 
-<body>
-    <header class="navbar">
-        <a id="logo" href="../index.html">Evertide</a>
+<body class="min-h-screen text-white flex flex-col font-sans opacity-0 transition-opacity duration-500 ease-in-out"
+    id="body-content">
 
-        <ul class="navbar-links">
-            <li><a href="../index.html">Home</a></li>
-            <li><a href="store.html">Store</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="contact.html">Contact</a></li>
-            <li><a href="cart.html">Cart</a></li>
+    <!-- Navbar -->
+    <header class="h-20 px-10 bg-black sticky top-0 z-50 flex justify-between items-center shadow-md">
+        <a href="../index.html"
+            class="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-blue-700 z-10 relative">Evertide</a>
+
+        <ul class="absolute left-1/2 transform -translate-x-1/2 flex gap-6 h-full items-center list-none p-0 m-0">
+            <li class="relative h-full flex items-center px-3 cursor-pointer group">
+                <a href="../index.html" class="text-lg font-bold text-white relative z-10 transition-colors">Home</a>
+                <div
+                    class="absolute bottom-0 left-0 w-full h-2/5 bg-gradient-to-t from-blue-600 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0">
+                </div>
+            </li>
+            <li class="relative h-full flex items-center px-3 cursor-pointer group">
+                <a href="store.html" class="text-lg font-bold text-white relative z-10 transition-colors">Store</a>
+                <div
+                    class="absolute bottom-0 left-0 w-full h-2/5 bg-gradient-to-t from-blue-600 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0">
+                </div>
+            </li>
+            <li class="relative h-full flex items-center px-3 cursor-pointer group">
+                <a href="about.html" class="text-lg font-bold text-white relative z-10 transition-colors">About</a>
+                <div
+                    class="absolute bottom-0 left-0 w-full h-2/5 bg-gradient-to-t from-blue-600 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0">
+                </div>
+            </li>
+            <li class="relative h-full flex items-center px-3 cursor-pointer group">
+                <a href="contact.html" class="text-lg font-bold text-white relative z-10 transition-colors">Contact</a>
+                <div
+                    class="absolute bottom-0 left-0 w-full h-2/5 bg-gradient-to-t from-blue-600 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0">
+                </div>
+            </li>
+            <li class="relative h-full flex items-center px-3 cursor-pointer group">
+                <a href="cart.html" class="text-lg font-bold text-white relative z-10 transition-colors">Cart</a>
+                <div
+                    class="absolute bottom-0 left-0 w-full h-2/5 bg-gradient-to-t from-blue-600 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0">
+                </div>
+            </li>
         </ul>
 
-        <div class="auth-links">
-            <a href="login.html">Sign In</a>
-            <a href="register.html" class="signup-btn">Sign Up</a>
+        <div class="auth-links flex gap-4 items-center">
+            <a href="login.html" class="text-white font-bold text-lg hover:text-blue-500 transition-colors">Sign In</a>
+            <a href="register.html"
+                class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-full font-bold transition-colors">Sign
+                Up</a>
         </div>
     </header>
-    <script src="../assets/js/transition.js"></script>
+
+    <!-- Contact Form -->
+    <div
+        class="w-full max-w-2xl mx-auto my-10 px-8 py-8 bg-white/10 backdrop-blur-[10px] rounded-2xl border border-white/10 shadow-2xl flex-grow animate-fadeIn">
+        <h2 class="text-3xl font-bold mb-6 text-white text-center">Contact Us</h2>
+        <p class="text-gray-300 text-center mb-8">We'd love to hear from you! Fill out the form below.</p>
+
+        <form class="flex flex-col gap-5">
+            <div>
+                <label for="name" class="block text-gray-300 mb-2 font-medium">Name</label>
+                <input type="text" id="name"
+                    class="w-full bg-black/40 border border-gray-600 rounded-lg p-3 text-white focus:outline-none focus:border-blue-500 transition-colors"
+                    placeholder="Your Name">
+            </div>
+
+            <div>
+                <label for="email" class="block text-gray-300 mb-2 font-medium">Email</label>
+                <input type="email" id="email"
+                    class="w-full bg-black/40 border border-gray-600 rounded-lg p-3 text-white focus:outline-none focus:border-blue-500 transition-colors"
+                    placeholder="your@email.com">
+            </div>
+
+            <div>
+                <label for="message" class="block text-gray-300 mb-2 font-medium">Message</label>
+                <textarea id="message" rows="5"
+                    class="w-full bg-black/40 border border-gray-600 rounded-lg p-3 text-white focus:outline-none focus:border-blue-500 transition-colors"
+                    placeholder="How can we help?"></textarea>
+            </div>
+
+            <button type="button"
+                class="mt-4 bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition-transform duration-200 hover:-translate-y-1 shadow-lg w-full">Send
+                Message</button>
+        </form>
+    </div>
+
+    <footer class="bg-black/90 backdrop-blur-xl border-t border-white/10 pt-16 pb-8 mt-auto">
+        <div class="max-w-7xl mx-auto px-10 grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+            <div class="space-y-4">
+                <h3 class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-blue-700">
+                    Evertide</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">Top-tier components for the ultimate gaming experience.
+                    Powering Iraq's next generation of creators.</p>
+            </div>
+            <div>
+                <h4 class="text-white font-bold mb-6">Shop</h4>
+                <ul class="space-y-3 text-sm text-gray-400">
+                    <li><a href="store.html" class="hover:text-blue-500 transition-colors">All Products</a></li>
+                    <li><a href="store.html?category=gpu" class="hover:text-blue-500 transition-colors">GPUs</a></li>
+                    <li><a href="store.html?category=cpu" class="hover:text-blue-500 transition-colors">CPUs</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-white font-bold mb-6">Support</h4>
+                <ul class="space-y-3 text-sm text-gray-400">
+                    <li><a href="faq.html" class="hover:text-blue-500 transition-colors">FAQ</a></li>
+                    <li><a href="contact.html" class="hover:text-blue-500 transition-colors">Contact Us</a></li>
+                    <li><a href="#" class="hover:text-blue-500 transition-colors">Shipping Policy</a></li>
+                    <li><a href="#" class="hover:text-blue-500 transition-colors">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-white font-bold mb-6">Stay Connected</h4>
+                <div class="flex gap-4 mb-6">
+                    <a href="#"
+                        class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all"><svg
+                            class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                            <path
+                                d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z" />
+                        </svg></a>
+                    <a href="#"
+                        class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all"><svg
+                            class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                        </svg></a>
+                </div>
+                <p class="text-gray-500 text-xs">Subscribe to our newsletter for the latest drops.</p>
+            </div>
+        </div>
+        <div class="border-t border-white/10 pt-8 text-center">
+            <p class="text-gray-500 text-sm">&copy; 2024 Evertide. All rights reserved. Created by Mahmood Dler Bahjat.
+            </p>
+        </div>
+    </footer>
+
+    <script src="../assets/js/cart.js"></script>
+    <script>
+        window.addEventListener('load', () => {
+            document.getElementById('body-content').classList.remove('opacity-0');
+            document.getElementById('body-content').classList.add('opacity-100');
+        });
+    </script>
 </body>
 
 </html>

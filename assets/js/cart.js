@@ -39,11 +39,11 @@ document.addEventListener('DOMContentLoaded', () => {
             btn.href = 'pages/cart.html';
         }
 
-        btn.className = 'floating-cart-btn';
-        btn.innerHTML = `<span class="btn-text">Go to Cart</span> <span class="cart-counter">${getCartCount()}</span>`;
+        // Tailwind Floating Button
+        btn.className = 'floating-cart-btn fixed bottom-8 right-8 bg-black/60 backdrop-blur-md border-2 border-blue-600 text-blue-500 px-6 py-3 rounded-full font-bold text-base z-50 flex items-center gap-3 shadow-lg hover:bg-blue-600/10 hover:-translate-y-1 transition-all duration-300';
+        btn.innerHTML = `<span class="btn-text">Go to Cart</span> <span class="cart-counter bg-blue-600 text-white rounded-full px-2 py-0.5 text-sm min-w-[24px] text-center">${getCartCount()}</span>`;
         document.body.appendChild(btn);
     } else {
-        // If button exists (static html?), update count
         updateCartButtonCount();
     }
 });
@@ -66,10 +66,27 @@ function triggerCartAnimation() {
 
     if (btn && btnText) {
         btnText.innerHTML = '&#10003; Item Added!';
-        btn.classList.add('expanded');
+        // Tailwind expansion classes
+        btn.classList.add('px-8', 'scale-105', 'bg-blue-600', 'text-white', 'border-transparent');
+        btn.classList.remove('text-blue-500', 'bg-black/60');
+
+        // Counter style change
+        const counter = btn.querySelector('.cart-counter');
+        if (counter) {
+            counter.classList.remove('bg-blue-600', 'text-white');
+            counter.classList.add('bg-white', 'text-blue-600');
+        }
 
         setTimeout(() => {
-            btn.classList.remove('expanded');
+            btn.classList.remove('px-8', 'scale-105', 'bg-blue-600', 'text-white', 'border-transparent');
+            btn.classList.add('text-blue-500', 'bg-black/60');
+
+            // Revert count style
+            if (counter) {
+                counter.classList.add('bg-blue-600', 'text-white');
+                counter.classList.remove('bg-white', 'text-blue-600');
+            }
+
             btnText.innerText = 'Go to Cart';
         }, 2000);
     }
@@ -79,7 +96,7 @@ function removeFromCart(productId) {
     let cart = getCart();
     cart = cart.filter(item => item.id !== productId);
     saveCart(cart);
-    renderCart(); // Re-render if on cart page
+    renderCart();
 }
 
 function updateQuantity(productId, change) {
@@ -104,7 +121,8 @@ function calculateTotal() {
 
 function renderCart() {
     const cartContainer = document.getElementById('cart-items');
-    const cartTotalElement = document.getElementById('cart-total-amount');
+    // Note: ID changed in HTML refactor to match convention, ensure HTML has id="cart-total"
+    const cartTotalElement = document.getElementById('cart-total');
 
     if (!cartContainer || !cartTotalElement) return;
 
@@ -112,25 +130,39 @@ function renderCart() {
     cartContainer.innerHTML = '';
 
     if (cart.length === 0) {
-        cartContainer.innerHTML = '<p>Your cart is empty.</p>';
+        cartContainer.innerHTML = '<p class="text-gray-400 italic">Your cart is empty.</p>';
         cartTotalElement.innerText = '0.00';
         return;
     }
 
     cart.forEach(item => {
         const itemElement = document.createElement('div');
-        itemElement.className = 'cart-item';
+        // Tailwind Cart Item
+        itemElement.className = 'flex items-center gap-4 p-4 border-b border-white/10 last:border-0 bg-white/5 rounded-lg';
+
+        // Flex container for mobile responsiveness could be added here
         itemElement.innerHTML = `
-            <img src="${item.image}" alt="${item.title}" class="cart-item-image">
-            <div class="cart-item-details">
-                <h4>${item.title}</h4>
-                <p>$${item.price}</p>
+            <div class="h-16 w-16 bg-white rounded p-1 flex-shrink-0">
+                <img src="${item.image}" alt="${item.title}" class="h-full w-full object-contain">
             </div>
-            <div class="cart-item-actions">
-                <button onclick="updateQuantity(${item.id}, -1)">-</button>
-                <span>${item.quantity}</span>
-                <button onclick="updateQuantity(${item.id}, 1)">+</button>
-                <button onclick="removeFromCart(${item.id})" class="btn-remove">Remove</button>
+            
+            <div class="flex-1 min-w-0">
+                <h4 class="text-white font-bold truncate">${item.title}</h4>
+                <p class="text-blue-400">$${item.price}</p>
+            </div>
+            
+            <div class="flex items-center gap-3">
+                <div class="flex items-center gap-2 bg-black/40 rounded px-2 py-1 border border-white/10">
+                    <button onclick="updateQuantity(${item.id}, -1)" class="text-gray-400 hover:text-white px-2 transition-colors">-</button>
+                    <span class="text-white font-medium min-w-[20px] text-center">${item.quantity}</span>
+                    <button onclick="updateQuantity(${item.id}, 1)" class="text-gray-400 hover:text-white px-2 transition-colors">+</button>
+                </div>
+                
+                <button onclick="removeFromCart(${item.id})" class="text-red-500 hover:text-red-400 p-2 transition-colors" title="Remove">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                    </svg>
+                </button>
             </div>
         `;
         cartContainer.appendChild(itemElement);
