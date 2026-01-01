@@ -11,7 +11,7 @@
   {
     "id": 2,
     "title": "AMD Ryzen 9 7950X",
-    "price": 699.00,
+    "price": 699.99,
     "description": "16-core, 32-thread desktop processor. The best for creators and gamers.",
     "category": "cpu",
     "image": "../assets/images/cpu.png",

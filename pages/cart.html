@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+<!-- Page Head -->
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Evertide | Cart</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Tailwind Configuration -->
     <script>
         tailwind.config = {
             theme: {
@@ -39,6 +42,7 @@
         }
     </script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <!-- Custom Styles -->
     <style>
         body {
             background-color: #050505;
@@ -53,7 +57,6 @@
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.05);
         }
-
 
         ::-webkit-scrollbar {
             width: 8px;
@@ -73,10 +76,10 @@
         }
     </style>
 </head>
+<!-- Page Body -->
 
 <body class="min-h-screen text-white font-sans opacity-0 transition-opacity duration-500 ease-in-out" id="body-content">
-
-
+    <!-- Navigation Header -->
     <header
         class="h-20 px-6 md:px-12 fixed w-full top-0 z-50 glass-panel border-b-0 border-white/5 transition-all duration-300"
         id="navbar">
@@ -91,7 +94,6 @@
                 </div>
                 <span class="text-white group-hover:text-blue-200 transition-colors">Evertide</span>
             </a>
-
             <nav class="hidden md:flex gap-8 items-center">
                 <a href="../index.html"
                     class="text-sm font-medium text-gray-400 hover:text-white transition-colors">Home</a>
@@ -103,7 +105,6 @@
                 <a href="contact.html"
                     class="text-sm font-medium text-gray-400 hover:text-white transition-colors">Contact</a>
             </nav>
-
             <div class="flex gap-4 items-center">
                 <a href="cart.html" class="relative group p-2">
                     <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -121,8 +122,7 @@
             </div>
         </div>
     </header>
-
-
+    <!-- Main Content -->
     <main class="pt-32 pb-24 px-6">
         <div class="max-w-4xl mx-auto glass-panel rounded-3xl p-8 md:p-12 animate-slide-up">
             <h1 class="text-3xl md:text-4xl font-bold mb-8 flex items-center gap-4">
@@ -130,12 +130,9 @@
                 <span class="text-lg font-normal text-gray-500 bg-white/5 px-3 py-1 rounded-full border border-white/5"
                     id="cart-count-badge">Items</span>
             </h1>
-
             <div id="cart-items" class="flex flex-col gap-4 mb-8 min-h-[200px]">
-
                 <p class="text-gray-500 italic text-center py-12">Your cart is empty.</p>
             </div>
-
             <div class="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-white/10 gap-6">
                 <div class="text-left">
                     <p class="text-gray-400 text-sm mb-1">Subtotal</p>
@@ -151,11 +148,9 @@
             </div>
         </div>
     </main>
-
-
+    <!-- Site Footer -->
     <footer class="bg-black/80 backdrop-blur-xl border-t border-white/5 pt-16 pb-8">
         <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
-
             <div class="space-y-4">
                 <a href="../index.html" class="text-2xl font-bold text-white flex items-center gap-2">
                     <div class="w-6 h-6 rounded bg-blue-600 flex items-center justify-center">
@@ -171,8 +166,6 @@
                     support.
                 </p>
             </div>
-
-
             <div>
                 <h4 class="text-white font-bold mb-6 text-sm uppercase tracking-wider">Shop</h4>
                 <ul class="space-y-3 text-sm text-gray-500">
@@ -184,8 +177,6 @@
                     <li><a href="store.html?category=case" class="hover:text-blue-400 transition-colors">Cases</a></li>
                 </ul>
             </div>
-
-
             <div>
                 <h4 class="text-white font-bold mb-6 text-sm uppercase tracking-wider">Support</h4>
                 <ul class="space-y-3 text-sm text-gray-500">
@@ -195,8 +186,6 @@
                     <li><a href="#" class="hover:text-blue-400 transition-colors">Returns & Warranty</a></li>
                 </ul>
             </div>
-
-
             <div>
                 <h4 class="text-white font-bold mb-6 text-sm uppercase tracking-wider">Follow Us</h4>
                 <div class="flex gap-4">
@@ -218,15 +207,14 @@
                 </div>
             </div>
         </div>
-
         <div class="border-t border-white/5 pt-8 text-center text-xs text-gray-700">
             <p>&copy; 2024 Evertide | Crafted for Performance.</p>
         </div>
     </footer>
-
-
+    <!-- Page Scripts -->
     <script src="../assets/js/transition.js"></script>
     <script src="../assets/js/cart.js"></script>
+    <!-- Navbar Scroll Logic -->
     <script>
         const navbar = document.getElementById('navbar');
         window.addEventListener('scroll', () => {

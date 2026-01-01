@@ -1,22 +1,23 @@
+// DOM Load Event
 document.addEventListener('DOMContentLoaded', () => {
     loadFeaturedProducts();
     setupScrollAnimations();
 });
-
+// Load Featured Products
 async function loadFeaturedProducts() {
     const container = document.getElementById('featured-products-container');
     if (!container) return;
-
     try {
+        // Fetch Product Data
         const response = await fetch('assets/data/products.json');
         const products = await response.json();
-
+        // Filter Featured Items
         const featured = [
             products.find(p => p.category === 'gpu' && p.price > 1000),
             products.find(p => p.category === 'case'),
             products.find(p => p.category === 'cpu' && p.price > 500)
         ].filter(Boolean);
-
+        // Render Products
         container.innerHTML = featured.map((product, index) => `
             <div class="group relative bg-white/5 backdrop-blur-sm rounded-xl overflow-hidden border border-white/10 hover:border-blue-500/50 transition-all duration-500 hover:-translate-y-2 opacity-0 animate-on-scroll" style="transition-delay: ${index * 100}ms">
                 <div class="aspect-[4/3] overflow-hidden p-6 flex items-center justify-center bg-gradient-to-b from-white/5 to-transparent">
@@ -37,10 +38,9 @@ async function loadFeaturedProducts() {
                 </div>
             </div>
         `).join('');
-
         setupScrollAnimations();
-
     } catch (error) {
+        // Handle Fetch Error
         console.warn('Fetch failed (likely CORS), using fallback data:', error);
         const fallbackProducts = [
             {
@@ -65,7 +65,7 @@ async function loadFeaturedProducts() {
                 image: "assets/images/cpu.png"
             }
         ];
-
+        // Render Fallback Products
         container.innerHTML = fallbackProducts.map((product, index) => `
             <div class="group relative bg-white/5 backdrop-blur-sm rounded-xl overflow-hidden border border-white/10 hover:border-blue-500/50 transition-all duration-500 hover:-translate-y-2 opacity-0 animate-on-scroll" style="transition-delay: ${index * 100}ms">
                 <div class="aspect-[4/3] overflow-hidden p-6 flex items-center justify-center bg-gradient-to-b from-white/5 to-transparent">
@@ -89,7 +89,7 @@ async function loadFeaturedProducts() {
         setupScrollAnimations();
     }
 }
-
+// Scroll Animation Observer
 function setupScrollAnimations() {
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -103,7 +103,7 @@ function setupScrollAnimations() {
         threshold: 0.1,
         rootMargin: '0px 0px -50px 0px'
     });
-
+    // Observe Elements
     document.querySelectorAll('.animate-on-scroll').forEach(el => {
         observer.observe(el);
     });
