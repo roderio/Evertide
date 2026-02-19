@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evertide | Craft Your Legend</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            blue: '#2563EB',
+                            dark: '#050505',
+                            accent: '#3B82F6'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.8s ease-out forwards',
+                        'slide-up': 'slideUp 0.8s ease-out forwards',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <!-- Custom Styles -->
+    <style>
+        body {
+            background-color: #050505;
+            background-image:
+                radial-gradient(circle at 15% 50%, rgba(37, 99, 235, 0.08) 0%, transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(59, 130, 246, 0.08) 0%, transparent 25%);
+            background-attachment: fixed;
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .text-gradient {
+            background: linear-gradient(to right, #60A5FA, #2563EB);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #000;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #444;
+        }
+    </style>
+</head>
+<!-- Page Body -->
+
+<body class="min-h-screen text-white font-sans opacity-0 transition-opacity duration-500 ease-in-out" id="body-content">
+    <!-- Navigation Header -->
+    <header
+        class="h-20 px-6 md:px-12 fixed w-full top-0 z-50 glass-panel border-b-0 border-white/5 transition-all duration-300"
+        id="navbar">
+        <div class="max-w-7xl mx-auto h-full flex justify-between items-center">
+            <a href="{{ route('home') }}" class="text-2xl font-bold tracking-tight flex items-center gap-2 group">
+                <div
+                    class="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-600 to-blue-400 flex items-center justify-center group-hover:rotate-12 transition-transform duration-300">
+                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                    </svg>
+                </div>
+                <span class="text-white group-hover:text-blue-200 transition-colors">Evertide</span>
+            </a>
+            <nav class="hidden md:flex gap-8 items-center">
+                <a href="{{ route('home') }}" class="text-sm font-medium text-blue-400">Home</a>
+                <a href="{{ route('store') }}"
+                    class="text-sm font-medium text-gray-400 hover:text-white transition-colors">Store</a>
+                <a href="{{ route('about') }}"
+                    class="text-sm font-medium text-gray-400 hover:text-white transition-colors">About</a>
+                <a href="{{ route('faq') }}"
+                    class="text-sm font-medium text-gray-400 hover:text-white transition-colors">FAQ</a>
+                <a href="{{ route('contact') }}"
+                    class="text-sm font-medium text-gray-400 hover:text-white transition-colors">Contact</a>
+            </nav>
+            <div class="flex gap-4 items-center">
+                <a href="{{ route('cart') }}" class="relative group p-2">
+                    <svg class="w-6 h-6 text-gray-400 group-hover:text-white transition-colors" fill="none"
+                        stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+                    </svg>
+                </a>
+                <a href="{{ route('login') }}"
+                    class="hidden md:block text-sm font-medium text-gray-400 hover:text-white transition-colors">Sign
+                    In</a>
+                <a href="{{ route('store') }}"
+                    class="bg-white text-black hover:bg-gray-200 px-5 py-2 rounded-full text-sm font-bold transition-all transform hover:scale-105 shadow-[0_0_20px_rgba(255,255,255,0.2)]">
+                    Build PC
+                </a>
+            </div>
+        </div>
+    </header>
+    <!-- Main Content -->
+    <main class="pt-20">
+        <!-- Hero Section -->
+        <section class="min-h-[85vh] flex items-center justify-center relative overflow-hidden">
+            <div class="absolute inset-0 z-0">
+                <div
+                    class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-blue-600/20 rounded-full blur-[120px] animate-pulse-slow">
+                </div>
+            </div>
+            <div class="max-w-7xl mx-auto px-6 relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="space-y-8 text-center lg:text-left animate-slide-up">
+                    <div
+                        class="inline-block px-4 py-1.5 rounded-full border border-blue-500/30 bg-blue-500/10 text-blue-400 text-sm font-medium mb-4">
+                        Next-Gen Hardware is Here
+                    </div>
+                    <h1 class="text-5xl lg:text-7xl font-extrabold tracking-tight leading-tight">
+                        Power Your <br> <span class="text-gradient">Unknown.</span>
+                    </h1>
+                    <p class="text-gray-400 text-lg leading-relaxed max-w-xl mx-auto lg:mx-0">
+                        We don't just sell parts; we fuel potential. Whether you're rendering worlds or conquering them,
+                        Evertide equips you with the raw power to push boundaries.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-4">
+                        <a href="{{ route('store') }}"
+                            class="px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold transition-all shadow-lg hover:shadow-blue-600/40 hover:-translate-y-1 text-center">
+                            Start Your Build
+                        </a>
+                        <a href="{{ route('about') }}"
+                            class="px-8 py-4 glass-panel hover:bg-white/10 text-white rounded-xl font-bold transition-all hover:-translate-y-1 text-center">
+                            Our Story
+                        </a>
+                    </div>
+                </div>
+                <div class="relative hidden lg:block animate-fade-in" style="animation-delay: 0.3s;">
+                    <div class="relative z-10 transform hover:scale-105 transition-transform duration-700">
+                        <img src="{{ asset('assets/images/case.png') }}" alt="Custom Build"
+                            class="w-full max-w-md mx-auto drop-shadow-[0_0_50px_rgba(37,99,235,0.3)] object-contain rounded-lg">
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Statistics Section -->
+        <section class="py-10 border-y border-white/5 bg-black/30">
+            <div class="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                <div>
+                    <div class="text-3xl font-bold text-white mb-1">5k+</div>
+                    <div class="text-gray-500 text-sm font-medium">Builds Completed</div>
+                </div>
+                <div>
+                    <div class="text-3xl font-bold text-white mb-1">24/7</div>
+                    <div class="text-gray-500 text-sm font-medium">Expert Support</div>
+                </div>
+                <div>
+                    <div class="text-3xl font-bold text-white mb-1">100%</div>
+                    <div class="text-gray-500 text-sm font-medium">Authenticity Guaranteed</div>
+                </div>
+                <div>
+                    <div class="text-3xl font-bold text-white mb-1">Iraq</div>
+                    <div class="text-gray-500 text-sm font-medium">Proudly Serving</div>
+                </div>
+            </div>
+        </section>
+        <!-- Featured Products -->
+        <section class="py-24 relative">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="flex justify-between items-end mb-12 animate-on-scroll opacity-0">
+                    <div>
+                        <h2 class="text-3xl md:text-4xl font-bold mb-4">
+                            Curated for <span class="text-blue-500">Excellence</span>
+                        </h2>
+                        <p class="text-gray-400">
+                            Hand-picked components for those who refuse to compromise.
+                        </p>
+                    </div>
+                    <a href="{{ route('store') }}"
+                        class="hidden md:flex items-center text-blue-400 font-medium hover:text-blue-300 transition-colors">
+                        View Full Collection <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                        </svg>
+                    </a>
+                </div>
+                <div id="featured-products-container" class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="col-span-full h-64 flex items-center justify-center">
+                        <div class="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin">
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-12 text-center md:hidden">
+                    <a href="{{ route('store') }}"
+                        class="text-blue-400 font-medium hover:text-blue-300 inline-flex items-center">
+                        View Full Collection <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+        <!-- Features Grid -->
+        <section class="py-24 bg-gradient-to-b from-transparent to-blue-900/10 relative">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div
+                        class="glass-panel p-8 rounded-2xl animate-on-scroll opacity-0 transition-all duration-700 hover:bg-white/5">
+                        <div
+                            class="w-12 h-12 bg-blue-500/20 rounded-xl flex items-center justify-center mb-6 text-blue-400">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">Performance First</h3>
+                        <p class="text-gray-400 leading-relaxed">
+                            We provide pieces that don't just look good but perform under pressure. Every item is vetted
+                            for quality.
+                        </p>
+                    </div>
+                    <div
+                        class="glass-panel p-8 rounded-2xl animate-on-scroll opacity-0 transition-all duration-700 delay-100 hover:bg-white/5">
+                        <div
+                            class="w-12 h-12 bg-purple-500/20 rounded-xl flex items-center justify-center mb-6 text-purple-400">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">Rapid Delivery</h3>
+                        <p class="text-gray-400 leading-relaxed">
+                            Your dream build shouldn't wait. We offer fastest shipping across Iraq to get you gaming
+                            sooner.
+                        </p>
+                    </div>
+                    <div
+                        class="glass-panel p-8 rounded-2xl animate-on-scroll opacity-0 transition-all duration-700 delay-200 hover:bg-white/5">
+                        <div
+                            class="w-12 h-12 bg-emerald-500/20 rounded-xl flex items-center justify-center mb-6 text-emerald-400">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
+                                </path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">Local Support</h3>
+                        <p class="text-gray-400 leading-relaxed">
+                            Questions? Issues? Our local support team understands your needs and speaks your language.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- FAQ Preview -->
+        <section class="py-24">
+            <div class="max-w-4xl mx-auto px-6">
+                <div class="text-center mb-16 animate-on-scroll opacity-0">
+                    <h2 class="text-3xl font-bold mb-4">You Ask, We Answer</h2>
+                    <p class="text-gray-400">Common questions from the community.</p>
+                </div>
+                <div class="space-y-4 animate-on-scroll opacity-0">
+                    <div
+                        class="glass-panel rounded-xl p-6 hover:border-blue-500/30 transition-colors cursor-pointer group">
+                        <h3 class="text-lg font-bold mb-2 group-hover:text-blue-400 transition-colors">
+                            How long does custom assembly take?
+                        </h3>
+                        <p class="text-gray-400">
+                            Typically 3-5 business days. We stress-test every build to ensure
+                            stability before it leaves our lab.
+                        </p>
+                    </div>
+                    <div
+                        class="glass-panel rounded-xl p-6 hover:border-blue-500/30 transition-colors cursor-pointer group">
+                        <h3 class="text-lg font-bold mb-2 group-hover:text-blue-400 transition-colors">
+                            Do you offer warranty?
+                        </h3>
+                        <p class="text-gray-400">
+                            Yes, a comprehensive 2-year warranty on all custom builds, plus manufacturer warranties on
+                            individual parts.
+                        </p>
+                    </div>
+                    <div
+                        class="glass-panel rounded-xl p-6 hover:border-blue-500/30 transition-colors cursor-pointer group">
+                        <h3 class="text-lg font-bold mb-2 group-hover:text-blue-400 transition-colors">
+                            Can I upgrade my PC later?
+                        </h3>
+                        <p class="text-gray-400">
+                            Absolutely. We build with standard components, making upgrades straightforward and
+                            future-proof.
+                        </p>
+                    </div>
+                    <div class="text-center pt-8">
+                        <a href="{{ route('faq') }}"
+                            class="text-sm font-bold text-white hover:text-blue-400 transition-colors underline underline-offset-4">
+                            Read all FAQs
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Newsletter Subscription -->
+        <section class="pb-24 pt-10 px-6">
+            <div
+                class="max-w-7xl mx-auto glass-panel rounded-3xl p-12 md:p-20 text-center relative overflow-hidden animate-on-scroll opacity-0">
+                <div
+                    class="absolute top-0 right-0 w-64 h-64 bg-blue-500/20 blur-[100px] rounded-full pointer-events-none">
+                </div>
+                <div
+                    class="absolute bottom-0 left-0 w-64 h-64 bg-purple-500/20 blur-[100px] rounded-full pointer-events-none">
+                </div>
+                <div class="relative z-10 max-w-2xl mx-auto">
+                    <h2 class="text-3xl md:text-5xl font-bold mb-6">Join the Inner Circle</h2>
+                    <p class="text-gray-300 text-lg mb-8">
+                        Get exclusive access to component drops, build guides, and special community events. No spam,
+                        just power.
+                    </p>
+                    <form class="flex flex-col sm:flex-row gap-4">
+                        <input type="email" placeholder="Enter your email address"
+                            class="flex-grow px-6 py-4 rounded-xl bg-black/40 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors">
+                        <button type="submit"
+                            class="px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold transition-all shadow-lg hover:shadow-blue-600/25">
+                            Subscribe
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+    <!-- Site Footer -->
+    <footer class="bg-black/80 backdrop-blur-xl border-t border-white/5 pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+            <div class="space-y-4">
+                <a href="#" class="text-2xl font-bold text-white flex items-center gap-2">
+                    <div class="w-6 h-6 rounded bg-blue-600 flex items-center justify-center">
+                        <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                    </div>
+                    Evertide
+                </a>
+                <p class="text-gray-500 text-sm leading-relaxed">
+                    Empowering the next generation of creators and gamers in Iraq with premium hardware and expert
+                    support.
+                </p>
+            </div>
+            <div>
+                <h4 class="text-white font-bold mb-6 text-sm uppercase tracking-wider">Shop</h4>
+                <ul class="space-y-3 text-sm text-gray-500">
+                    <li><a href="{{ route('store') }}" class="hover:text-blue-400 transition-colors">All Products</a></li>
+                    <li>
+                        <a href="{{ route('store') }}?category=gpu" class="hover:text-blue-400 transition-colors">Graphics
+                            Cards
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('store') }}?category=cpu" class="hover:text-blue-400 transition-colors">
+                            Processors
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('store') }}?category=case" class="hover:text-blue-400 transition-colors">
+                            Cases
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-white font-bold mb-6 text-sm uppercase tracking-wider">Support</h4>
+                <ul class="space-y-3 text-sm text-gray-500">
+                    <li><a href="{{ route('faq') }}" class="hover:text-blue-400 transition-colors">FAQs</a></li>
+                    <li><a href="{{ route('contact') }}" class="hover:text-blue-400 transition-colors">Contact Us</a></li>
+                    <li><a href="#" class="hover:text-blue-400 transition-colors">Shipping Information</a></li>
+                    <li><a href="#" class="hover:text-blue-400 transition-colors">Returns & Warranty</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-white font-bold mb-6 text-sm uppercase tracking-wider">Follow Us</h4>
+                <div class="flex gap-4">
+                    <a href="#"
+                        class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                            <path
+                                d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z" />
+                        </svg>
+                    </a>
+                    <a href="#"
+                        class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                            <path fill-rule="evenodd"
+                                d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.488 2.53c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.683.566 1.15.748.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="border-t border-white/5 pt-8 text-center text-xs text-gray-700">
+            <p>&copy; 2024 Evertide | Crafted for Performance.</p>
+        </div>
+    </footer>
+    <!-- Page Transition Script -->
+    <script src="{{ asset('assets/js/transition.js') }}"></script>
+    <!-- Home Page Logic -->
+    <script src="{{ asset('assets/js/home.js') }}"></script>
+    <!-- Navbar Scroll Logic -->
+    <script>
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-black/80', 'backdrop-blur-xl', 'shadow-2xl');
+                navbar.classList.remove('border-b-0');
+                navbar.classList.add('border-b');
+            } else {
+                navbar.classList.remove('bg-black/80', 'backdrop-blur-xl', 'shadow-2xl', 'border-b');
+                navbar.classList.add('border-b-0');
+            }
+        });
+        setTimeout(() => {
+            const body = document.getElementById('body-content');
+            if (window.getComputedStyle(body).opacity === '0') {
+                body.classList.remove('opacity-0');
+            }
+        }, 1000);
+    </script>
+</body>
+
+</html>
