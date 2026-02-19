@@ -2,9 +2,9 @@
 
 ![Evertide Hero](assets/images/case.png)
 
-Evertide is a modern, premium frontend web application designed for a high-end online computer part and custom PC build shop. Featuring a striking Bento-style UI, glassmorphism aesthetics, and meticulously crafted animations, Evertide brings next-gen hardware to life with a fully immersive browsing experience.
+Evertide is a modern, premium web application designed for a high-end online computer part and custom PC build shop. Featuring a striking Bento-style UI, glassmorphism aesthetics, and meticulously crafted animations, Evertide brings next-gen hardware to life with a fully immersive browsing experience.
 
-> **Note:** This project is a pure frontend implementation built as a homework assignment for a Web Programming I course. It currently operates without a backend database.
+> **Note:** This project began as a pure frontend homework assignment for a Web Programming I course and has been completely upgraded into a dynamic, data-driven PHP application powered by the **Laravel** framework and a **MySQL** database.
 
 ## Features
 
@@ -13,13 +13,13 @@ Evertide has been built around a clean, visually dynamic user experience priorit
   - Dark-mode aesthetics using custom-tailored glassmorphism panels.
   - Smooth page transitions and micro-animations upon scroll.
   - Fully responsive grid layout powered by Tailwind CSS.
-- **Store & Product Catalog:** Browse curated, high-performance PC components, complete with dynamic product loading and category filtering (GPUs, CPUs, Cases).
+- **Dynamic Store & Product Catalog:** Browse curated, high-performance PC components. The products on the store page are fetched dynamically from a backend MySQL database. Features live category filtering (GPUs, CPUs, Cases) and search capability.
 - **Custom PC Builder Flow:** Prominent calls-to-action guiding users to start their ultimate custom build.
-- **8 Distinct Pages:**
+- **Dynamic Routing & Architecture:**
   - **Home:** Hero section, animated feature grid, statistics, FAQ preview, and newsletter subscription form.
-  - **Store:** Product catalog demonstrating category filtering capabilities.
+  - **Store:** Product catalog demonstrating category filtering capabilities powered by Laravel backend controllers.
   - **About:** The story, mission, and guarantees behind Evertide.
-  - **Cart:** Shopping cart management with interactive frontend logic.
+  - **Cart:** Shopping cart management with interactive frontend logic persisting product selections.
   - **Contact:** Get in touch with customer support.
   - **FAQ:** A comprehensively designed Frequently Asked Questions page.
   - **Login & Register:** Beautifully styled user authentication interfaces.
@@ -27,47 +27,73 @@ Evertide has been built around a clean, visually dynamic user experience priorit
 
 ## Technologies Used
 
-This project was built from scratch leveraging modern web development tools:
-- **HTML5:** Semantic and accessible HTML structure.
+This project leverages a robust modern web development stack:
+- **PHP Laravel 11:** Powering the backend architecture, Models, Views, and Controllers (MVC).
+- **MySQL Database:** Relational database management storing the product catalog securely.
+- **Blade Templating Engine:** Laravel's powerful UI engine for dynamically rendering web pages.
 - **Tailwind CSS (via CDN):** Utility-first CSS framework for rapid, responsive UI development.
-- **Vanilla JavaScript:** Powers interactive DOM manipulation, page transitions, responsive scroll navigation, filtering logic, and cart state management.
-- **Custom CSS Keyframes:** Enhances interactions with fade-ins, slide-ups, and pulsating glow effects.
+- **Vanilla JavaScript:** Powers interactive DOM manipulation, page transitions, responsive scroll navigation, filtering logic, and cart state management while consuming backend-injected data structures.
 
 ## Project Structure
 
 ```text
 Evertide/
-├── assets/
-│   ├── images/      # Product images, icons, and hero graphics (e.g., case.png)
-│   └── js/          # JavaScript logic
-│       ├── home.js
-│       ├── cart.js
-│       └── transition.js
-├── pages/           # HTML templates for the different views
-│   ├── about.html
-│   ├── cart.html
-│   ├── contact.html
-│   ├── faq.html
-│   ├── login.html
-│   ├── payment.html
-│   ├── register.html
-│   └── store.html
-├── index.html       # Main landing page
-└── README.md        # Project documentation
+├── evertide-backend/        # The core Laravel backend application structure
+│   ├── app/                 # Contains Eloquent Models (Product.php) and Controllers (ProductController.php)
+│   ├── database/            # Contains migrations and seeders for the MySQL database
+│   ├── public/              # Publicly accessible directory
+│   │   └── assets/          # JavaScript logic (cart.js, home.js) and images
+│   ├── resources/           # Uncompiled assets and UI templates
+│   │   └── views/           # Blade template files replacing the old pure HTML files (e.g., store.blade.php)
+│   ├── routes/              # Contains web.php mapping URLs to their corresponding views or controllers
+│   └── .env                 # Environment variables including Database credentials
+└── README.md                # Project documentation
 ```
 
 ## Getting Started
 
-Because this is a purely frontend project, running it is incredibly simple without complex server requirements.
+Follow these instructions to get the Laravel web application up and running locally.
 
+### Prerequisites
+- PHP 8.2 or higher
+- Composer installed
+- A MySQL server (like Laragon, XAMPP, or distinct MySQL installation)
+
+### Installation
 1. **Clone the repository:**
    ```bash
    git clone https://github.com/your-username/evertide.git
    ```
-2. **Open the project:**
-   Navigate into the downloaded folder and open `index.html` in your preferred web browser. 
-3. **Optional (Live Server):** 
-   For an optimal development experience, serve the directory using a local web server (like the "Live Server" extension in VS Code) to test absolute paths and simulated local fetch requests if added later.
+2. **Setup the Database:**
+   - Open your MySQL management tool (e.g. Laragon, phpMyAdmin, MySQL Workbench).
+   - Create a new database named `evertide_backend`.
+3. **Navigate and Install Dependencies:**
+   ```bash
+   cd Evertide/evertide-backend
+   composer install
+   ```
+4. **Configure Environment:**
+   - Copy the `.env.example` file and rename it to `.env`.
+   - Update the database credentials inside `.env` to match your local setup:
+     ```env
+     DB_CONNECTION=mysql
+     DB_HOST=127.0.0.1
+     DB_PORT=3306
+     DB_DATABASE=evertide_backend
+     DB_USERNAME=root
+     DB_PASSWORD=your_password
+     ```
+5. **Run Migrations and Seed Data:**
+   This sets up the `products` table and inserts the starting product catalog:
+   ```bash
+   php artisan migrate --seed
+   ```
+6. **Start the Development Server:**
+   ```bash
+   php artisan serve
+   ```
+7. **View the Application:**
+   Open your browser and navigate to `http://localhost:8000` (or `http://127.0.0.1:8000`) to view Evertide!
 
 ## Responsiveness
 
@@ -78,6 +104,6 @@ Evertide has been rigorously styled to adapt fluidly to multiple screen sizes:
 
 ## Custom Modifications
 
-If you want to tweak colors or typography, the base Tailwind configuration is embedded directly within the `<script>` tag inside the `<head>` of `index.html`. You can globally alter brand colors, fonts, or keyframe animations from this single configuration block.
+If you want to tweak colors or typography, the base Tailwind configuration is embedded directly within the `<script>` tag inside the `<head>` of the `index.blade.php` file. You can globally alter brand colors, fonts, or keyframe animations from this single configuration block.
 
 !!!!!!!!!!!!!!!! THIS PROJECT HAS BEEN CREATED AS AN EXAMPLE FOR A UNIVERSITY HOMEWORK. !!!!!!!!!!!!!!!!
