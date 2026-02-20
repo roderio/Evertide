@@ -38,16 +38,16 @@ This project leverages a robust modern web development stack:
 
 ```text
 Evertide/
-├── evertide-backend/        # The core Laravel backend application structure
-│   ├── app/                 # Contains Eloquent Models (Product.php) and Controllers (ProductController.php)
-│   ├── database/            # Contains migrations and seeders for the MySQL database
-│   ├── public/              # Publicly accessible directory
-│   │   └── assets/          # JavaScript logic (cart.js, home.js) and images
-│   ├── resources/           # Uncompiled assets and UI templates
-│   │   └── views/           # Blade template files replacing the old pure HTML files (e.g., store.blade.php)
-│   ├── routes/              # Contains web.php mapping URLs to their corresponding views or controllers
-│   └── .env                 # Environment variables including Database credentials
-└── README.md                # Project documentation
+├── evertide-backend/       
+│   ├── app/                
+│   ├── database/            
+│   ├── public/            
+│   │   └── assets/          
+│   ├── resources/           
+│   │   └── views/           
+│   ├── routes/              
+│   └── .env                 
+└── README.md               
 ```
 
 ## Getting Started
